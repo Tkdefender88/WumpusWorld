@@ -18,7 +18,6 @@ public class Room {
 	private Boolean gold = false;
 	private Boolean pit = false;
 	private Boolean wumpus = false;
-	
 
 	public Room(int x, int y){
 		this.x = x;
