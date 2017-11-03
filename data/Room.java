@@ -24,43 +24,43 @@ public class Room {
 		this.y = y;
 	}
 
-	public layer() {
-		room[][] map = getCave();
-		for (Room[] r : map) {
-			for (Room x : r) {
-				if(r != 0) {
-					if(cave[r - 1][x].isPit ) {
+	public void layer() {
+		Room[][] map = Cave.getCave();
+		for (int y = 0; y < map[0].length; y++) {
+			for (int x = 0; x < map.length; x++) {
+				if(y != 0) {
+					if(map[y - 1][x].isPit() ) {
 						breezy = true;
 
 					}
-					if(cave[r - 1][x].isWumpus) {
+					if(map[y - 1][x].isWumpus()) {
 						stinky = true;
 					} 	 
 				}
-				if(r != map.length - 1) {
-					if(cave[r + 1][x].isPit) {
+				if(y != map[0].length - 1) {
+					if(map[y + 1][x].isPit()) {
 						breezy = true;
 
 					}
-					if(cave[r + 1][x].isWumpus) {
+					if(map[y + 1][x].isWumpus()) {
 						stinky = true;
 					} 	 
 				}
 				if(x != 0) {
-					if(cave[r][x - 1].isPit) {
+					if(map[y][x - 1].isPit()) {
 						breezy = true;
 
 					}
-					if(cave[r][x - 1].isWumpus) {
+					if(map[y][x - 1].isWumpus()) {
 						stinky = true;
 					} 	 
 				}
-				if(x != r.length() - 1) {
-					if(cave[r][x + 1].isPit) {
+				if(x != map[0].length - 1) {
+					if(map[y][x + 1].isPit()) {
 						breezy = true;
 
 					}
-					if(cave[r][x + 1].isWumpus) {
+					if(map[y][x + 1].isWumpus()) {
 						stinky = true;
 					} 	 
 				}
@@ -70,13 +70,38 @@ public class Room {
 		}
 	}
 	
-	public setPit() {
+/*
+ * player
+ * notvisited
+ * gold
+ * wumpus
+ * stench
+ * breeze
+ * pit
+ * visited
+ */
+	public void draw() {
+		picture(x, y, texture);
+		if(isPit()) {
+			picture(x, y, "PitTile.png");
+		}
+		if(isBreezy()) {
+			picture(x, y, "BreezeTile.png");
+		}
+		if(isStench()) {
+			picture(x, y, "StenchTile.png");
+		}
+		
+		System.out.printf("X: %d Y: %d\n", x ,y);
+	}
+	
+	public void setPit() {
 		this.pit = true;
 	}
-	public setGold() {
+	public void setGold() {
 		this.gold = true;
 	}
-	public setWumpus() {
+	public void setWumpus() {
 		this.wumpus = true;
 	}
 	
@@ -96,30 +121,5 @@ public class Room {
 		return breezy;
 	}
 	
-	
-/*
- * player
- * notvisited
- * gold
- * wumpus
- * stench
- * breeze
- * pit
- * visited
- */
-	public void draw() {
-		picture(x, y, texture);
-		if(isPit) {
-			picture(x, y, "PitTile.png");
-		}
-		if(isBreeze) {
-			picture(x, y, "BreezeTile.png");
-		}
-		if(isStench) {
-			picture(x, y, "StenchTile.png");
-		}
-		
-		System.out.printf("X: %d Y: %d\n", x ,y);
-	}
 
 }
