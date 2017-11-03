@@ -14,12 +14,10 @@ public class Room {
 	
 	private int x, y;
 	private String texture = "VisitedMapTile.png";
-	private RoomType type;
 	
-	public Room(int x, int y, RoomType type){
+	public Room(int x, int y){
 		this.x = x;
 		this.y = y;
-		this.type = type;
 	}
 
 	public void draw() {
