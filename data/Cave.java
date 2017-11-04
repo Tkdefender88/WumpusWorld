@@ -68,11 +68,11 @@ public class Cave {
 	}
 	
 	private int randomX() {
-		return (int) (Math.random() * width);
+		return (int) (Math.random() * width-1) + 1;
 	}
 	
 	private int randomY() {
-		return (int) (Math.random() * height);
+		return (int) (Math.random() * height - 1) + 1;
 	}
 	
 	public static Room[][] getCave() {
