@@ -14,7 +14,8 @@ public class Room {
 
 	private int x, y;
 	private String texture = "VisitedMapTile.png";
-	private Boolean stinky, breezy;
+	private Boolean stinky = false;
+	private Boolean breezy = false;
 	private Boolean gold = false;
 	private Boolean pit = false;
 	private Boolean wumpus = false;
@@ -64,8 +65,6 @@ public class Room {
 						stinky = true;
 					} 	 
 				}
-
-
 			}
 		}
 	}
@@ -85,14 +84,19 @@ public class Room {
 		if(isPit()) {
 			picture(x, y, "PitTile.png");
 		}
+		System.out.println(isBreezy());
 		if(isBreezy()) {
 			picture(x, y, "BreezeTile.png");
 		}
 		if(isStench()) {
 			picture(x, y, "StenchTile.png");
 		}
-		
-		System.out.printf("X: %d Y: %d\n", x ,y);
+		if(isGold()) {
+			picture(x, y, "GoldTile.png");
+		} 
+		if(isWumpus()) {
+			picture(x, y, "WumpusTile.png");
+		}
 	}
 	
 	public void setPit() {
@@ -120,6 +124,4 @@ public class Room {
 	public boolean isBreezy() {
 		return breezy;
 	}
-	
-
 }

@@ -1,12 +1,14 @@
 package data;
 
-import static helpers.StdDraw.*;
 /**
  * @authors Justin Bak + Marcus Frisbee
  *
  *
  *
  */
+
+import static helpers.StdDraw.*;
+
 public class WumpusWorld {
 	
 	public static final int TILE_SIZE = 100;
@@ -23,7 +25,6 @@ public class WumpusWorld {
 		setCanvasSize(width, height);
 		setXscale(0, width);
 		setYscale(0, height);
-	
 		
 		cave.draw();
 	}
