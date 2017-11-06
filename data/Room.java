@@ -19,6 +19,7 @@ public class Room {
 	private Boolean gold = false;
 	private Boolean pit = false;
 	private Boolean wumpus = false;
+	private Boolean isVisited = false;
 
 	public Room(int x, int y){
 		this.x = x;
@@ -98,6 +99,9 @@ public class Room {
 		if(isWumpus()) {
 			picture(x, y, "WumpusTile.png");
 		}
+		if(!isVisited()) {
+			picture(x, y, "NotVisitedMapTile.png");
+		}
 	}
 
 	public void setPit() {
@@ -108,6 +112,9 @@ public class Room {
 	}
 	public void setWumpus() {
 		this.wumpus = true;
+	}
+	public void visited() {
+		this.isVisited = true;
 	}
 
 	public boolean isPit() {
@@ -124,5 +131,8 @@ public class Room {
 	}
 	public boolean isBreezy() {
 		return breezy;
+	}
+	public boolean isVisited() {
+		return isVisited;
 	}
 }
