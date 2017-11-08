@@ -49,7 +49,7 @@ public class Room {
 				stinky = true;
 			} 	 
 		}
-		if(xPos != map[0].length -1 ) {
+		if(xPos != map.length -1 ) {
 			if(map[xPos +1][yPos].isPit()) {
 				breezy = true;
 
