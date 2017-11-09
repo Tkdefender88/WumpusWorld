@@ -1,18 +1,19 @@
 package data;
 
-import static helpers.StdDraw.*;
+import static helpers.StdDraw.picture;
 
 /**
- * 
  * @author Justin Bak + Marcus Frisbee
  *
  * 
- * Description:
+ * Description: Draws the room and stores whether the room is breezy, stinky
+ * has gold, has a pit or has a wumpus.
  */
 
 public class Room {
 
 	private int x, y;
+	private static final int TILE_SIZE = Cave.TILE_SIZE;
 	private String texture = "VisitedMapTile.png";
 	private Boolean stinky = false;
 	private Boolean breezy = false;
@@ -20,16 +21,25 @@ public class Room {
 	private Boolean pit = false;
 	private Boolean wumpus = false;
 	private Boolean isVisited = false;
-
+	
+	//Room constructor.
 	public Room(int x, int y){
 		this.x = x;
 		this.y = y;
 	}
-
+	
+	/**
+	 * Looks up to the map of the cave and determines if the tiles next to it
+	 * are pits or the wumpus. If there is a pit or wumpus next to it then the
+	 * tile becomes breezy or stinky respectively.
+	 */
 	public void layer() {
 		Room[][] map = Cave.getCave();
-		int xPos = ((x - 50) / 100);
-		int yPos = ((y - 50) / 100);
+		
+		//Subtracting 50 to compensate for stdDraw drawing from center.
+		int xPos = ((x - 50) / TILE_SIZE);
+		int yPos = ((y - 50) / TILE_SIZE);
+		
 		if(xPos != 0) {
 			if(map[xPos -1][yPos].isPit() ) {
 				breezy = true;
@@ -39,7 +49,7 @@ public class Room {
 				stinky = true;
 			} 	 
 		}
-		if(xPos != map[0].length -1 ) {
+		if(xPos != map.length -1 ) {
 			if(map[xPos +1][yPos].isPit()) {
 				breezy = true;
 
@@ -70,23 +80,16 @@ public class Room {
 	}
 
 
-
-	/*
-	 * player
-	 * notvisited
-	 * gold
-	 * wumpus
-	 * stench
-	 * breeze
-	 * pit
-	 * visited
+	/**
+	 * Draw method for the room. Has if statements to determine which textrures
+	 * to draw over the tile depending on if it is breezy, stinky, has the
+	 * wumpus or the gold or is a pit.
 	 */
 	public void draw() {
 		picture(x, y, texture);
 		if(isPit()) {
 			picture(x, y, "PitTile.png");
 		}
-		System.out.println(isBreezy());
 		if(isBreezy()) {
 			picture(x, y, "BreezeTile.png");
 		}
@@ -99,11 +102,16 @@ public class Room {
 		if(isWumpus()) {
 			picture(x, y, "WumpusTile.png");
 		}
-		if(!isVisited()) {
+		/*if(!isVisited()) {
 			picture(x, y, "NotVisitedMapTile.png");
-		}
+		}*/
 	}
 
+	/*
+	 **************************************************************************
+	 *								GETTERS AND SETTERS
+	 ************************************************************************** 
+	 */
 	public void setPit() {
 		this.pit = true;
 	}
@@ -116,7 +124,6 @@ public class Room {
 	public void visited() {
 		this.isVisited = true;
 	}
-
 	public boolean isPit() {
 		return pit;
 	}

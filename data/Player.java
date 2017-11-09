@@ -10,6 +10,7 @@ import static helpers.StdDraw.*;
 
 public class Player {
 	
+	private static final int TILE_SIZE = WumpusWorld.TILE_SIZE;
 	private String texture = "HeroTile.png";
 	private int x, y;
 	private Boolean hasArrow = true;
