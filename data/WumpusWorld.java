@@ -44,7 +44,7 @@ public class WumpusWorld {
     while (!isGameOver()) {
       cave.draw();
       archer.update();
-      show(200);
+      show(100);
       clear();
     }
   }

@@ -8,6 +8,7 @@ package data;
 
 import static helpers.StdDraw.isKeyPressed;
 import static helpers.StdDraw.picture;
+import static helpers.StdDraw.show;
 import java.awt.event.KeyEvent;
 
 public class Player {
@@ -42,14 +43,22 @@ public class Player {
    * Takes input and moves the player.
    */
   private void input() {
+    int delay = 150;
     if (isKeyPressed(KeyEvent.VK_W) && yPos < WumpusWorld.height / TILE_SIZE - 1) {
       yPos++;
+      show(delay);
     } else if (isKeyPressed(KeyEvent.VK_S) && yPos > 0) {
       yPos--;
+      show(delay);
     } else if (isKeyPressed(KeyEvent.VK_D) && xPos < WumpusWorld.width / TILE_SIZE - 1) {
       xPos++;
+      show(delay);
     } else if (isKeyPressed(KeyEvent.VK_A) && xPos > 0) {
       xPos--;
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0) {
+      // Room.shootWumpus(x - 1, y);
+      show(delay);
     }
     // TODO: handle shooting the arrow
   }
