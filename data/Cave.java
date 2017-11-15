@@ -8,10 +8,6 @@
 
 package data;
 
-import static helpers.StdDraw.setCanvasSize;
-import static helpers.StdDraw.setXscale;
-import static helpers.StdDraw.setYscale;
-
 public class Cave {
 
   public static final int TILE_SIZE = 100;
@@ -28,17 +24,15 @@ public class Cave {
   }
 
   // Temporary main method added for Part 1, will not be used in later parts.
-  public static void main(String[] args) {
-    int width = Integer.parseInt(args[0]) * TILE_SIZE;
-    int height = Integer.parseInt(args[1]) * TILE_SIZE;
-
-    cave = new Cave(width / TILE_SIZE, height / TILE_SIZE);
-    setCanvasSize(width, height);
-    setXscale(0, width);
-    setYscale(0, height);
-
-    cave.draw();
-  }
+  /*
+   * public static void main(String[] args) { int width = Integer.parseInt(args[0]) * TILE_SIZE; int
+   * height = Integer.parseInt(args[1]) * TILE_SIZE;
+   * 
+   * cave = new Cave(width / TILE_SIZE, height / TILE_SIZE); setCanvasSize(width, height);
+   * setXscale(0, width); setYscale(0, height);
+   * 
+   * cave.draw(); }
+   */
 
   /**
    * Draw method calls all the rooms to draw themselves to the screen.
@@ -88,8 +82,9 @@ public class Cave {
    * places the gold at a random x and y location on the map.
    */
   private void placeGold() {
-    int xPos = randomX();
-    int yPos = randomY();
+    int[] coords = randomTile();
+    int xPos = coords[0];
+    int yPos = coords[1];
     map[xPos][yPos].setGold();
   }
 
@@ -97,8 +92,9 @@ public class Cave {
    * Places the wumpus at a random x and y location on the map.
    */
   private void placeWumpus() {
-    int xPos = randomX();
-    int yPos = randomY();
+    int[] coords = randomNon00Tile();
+    int xPos = coords[0];
+    int yPos = coords[1];
     map[xPos][yPos].setWumpus();
   }
 
@@ -107,8 +103,26 @@ public class Cave {
    * 
    * @return an integer for the x coordinate of the wumpus or gold.
    */
-  private int randomX() {
-    return (int) (Math.random() * width - 1) + 1;
+  private int[] randomNon00Tile() {
+    int x = 0;
+    int y = 0;
+    int[] coords = new int[2];
+    while (x == 0 && y == 0) {
+      x = (int) (Math.random() * width - 1);
+      y = (int) (Math.random() * height - 1);
+    }
+    coords[0] = x;
+    coords[1] = y;
+    return coords;
+  }
+
+  private int[] randomTile() {
+    int x = (int) (Math.random() * width - 1);
+    int y = (int) (Math.random() * height - 1);
+    int[] coords = new int[2];
+    coords[0] = x;
+    coords[1] = y;
+    return coords;
   }
 
   /**
