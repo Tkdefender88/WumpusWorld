@@ -107,9 +107,10 @@ public class Room {
 		if (isWumpus()) {
 			picture(x, y, "WumpusTile.png");
 		}
-		/*
-		 * if(!isVisited()) { picture(x, y, "NotVisitedMapTile.png"); }
-		 */
+		if(!isVisited()) { 
+			picture(x, y, "NotVisitedMapTile.png"); 
+		}
+
 	}
 
 	/*
@@ -129,12 +130,14 @@ public class Room {
 		this.wumpus = true;
 	}
 
-	public void visited() {
-		this.isVisited = true;
+	public static void visited(int x, int y) {
+		Room[][] map = Cave.getCave();
+		map[x][y].isVisited = true;
 	}
 
-	public void killWumpus() {
-		this.wumpus = false;
+	public static void killWumpus(int x, int y) {
+		Room[][] map = Cave.getCave();
+		map[x][y].wumpus = false;
 	}
 
 	public boolean isPit() {
