@@ -22,6 +22,7 @@ public class WumpusWorld {
   static WumpusWorld ww;
   Player archer;
   static Cave cave;
+  
 
   public static void main(String[] args) {
     width = Integer.parseInt(args[0]) * TILE_SIZE;
@@ -47,11 +48,25 @@ public class WumpusWorld {
       show(100);
       clear();
     }
+    cave.draw();
+    archer.update();
+    show(100);
+    
   }
 
   public boolean isGameOver() {
     boolean gameOver = false;
-    // TODO: Add checks for game over condition.
+    int x = archer.getXPos();
+    int y = archer.getYPos();
+    System.out.println(x + " " + y);
+    Room[][] map = Cave.getCave();
+		if(map[x][y].isWumpus()) {
+			gameOver = true;
+			System.out.println("you die");
+		}
+		if(map[x][y].isPit()) {
+			gameOver = true;
+		}
     return gameOver;
   }
 }

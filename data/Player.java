@@ -28,10 +28,17 @@ public class Player {
   }
 
   public void update() {
-    draw();
-    input();
+  	draw();
+  	input();
   }
-
+  
+  public int getXPos() {
+  	return xPos;
+  }
+  
+  public int getYPos() {
+  	return yPos;
+  }
   /**
    * Draws the player to the screen.
    */
@@ -58,8 +65,22 @@ public class Player {
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0) {
       // Room.shootWumpus(x - 1, y);
+    	//hasArrow =false;
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_L) && xPos > 0) {
+      // Room.shootWumpus(x + 1, y);
+    	//hasArrow =false;
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_I) && xPos > 0) {
+      // Room.shootWumpus(x , y + 1);
+    	//hasArrow =false;
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_K) && xPos > 0) {
+      // Room.shootWumpus(x , y - 1);
+    	//hasArrow =false;
       show(delay);
     }
+    Room.visited(xPos, yPos);
     // TODO: handle shooting the arrow
   }
 }

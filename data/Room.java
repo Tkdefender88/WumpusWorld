@@ -46,8 +46,6 @@ public class Room {
 			}
 			if (map[xPos - 1][yPos].isWumpus()) {
 				stinky = true;
-			}else {
-				stinky = false;
 			}
 		}
 		if (xPos != map.length - 1) {
@@ -57,8 +55,6 @@ public class Room {
 			}
 			if (map[xPos + 1][yPos].isWumpus()) {
 				stinky = true;
-			}else {
-				stinky = false;
 			}
 		}
 		if (yPos != 0) {
@@ -68,8 +64,6 @@ public class Room {
 			}
 			if (map[xPos][yPos - 1].isWumpus()) {
 				stinky = true;
-			}else {
-				stinky = false;
 			}
 		}
 		if (yPos != map[0].length - 1) {
@@ -79,8 +73,6 @@ public class Room {
 			}
 			if (map[xPos][yPos + 1].isWumpus()) {
 				stinky = true;
-			}else {
-				stinky = false;
 			}
 		}
 	}
@@ -139,6 +131,14 @@ public class Room {
 		Room[][] map = Cave.getCave();
 		map[x][y].wumpus = false;
 	}
+	
+	public static void isSafe(int x,int y) {
+		Room[][] map = Cave.getCave();
+		if(map[x][y].isWumpus()) {
+			
+		}
+	}
+	
 
 	public boolean isPit() {
 		return pit;
