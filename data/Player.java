@@ -28,17 +28,18 @@ public class Player {
   }
 
   public void update() {
-  	draw();
-  	input();
+    draw();
+    input();
   }
-  
+
   public int getXPos() {
-  	return xPos;
+    return xPos;
   }
-  
+
   public int getYPos() {
-  	return yPos;
+    return yPos;
   }
+
   /**
    * Draws the player to the screen.
    */
@@ -63,21 +64,23 @@ public class Player {
     } else if (isKeyPressed(KeyEvent.VK_A) && xPos > 0) {
       xPos--;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0) {
+    } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0 && hasArrow) {
       Room.killWumpus(xPos - 1, yPos);
-    	hasArrow = false;
+      hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_L) && xPos < WumpusWorld.width / TILE_SIZE - 1) {
-    	Room.killWumpus(xPos + 1, yPos);
-    	hasArrow = false;
+    } else if (isKeyPressed(KeyEvent.VK_L) && xPos < WumpusWorld.width / TILE_SIZE - 1
+        && hasArrow) {
+      Room.killWumpus(xPos + 1, yPos);
+      hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_I) && yPos < WumpusWorld.height / TILE_SIZE - 1) {
-    	Room.killWumpus(xPos, yPos + 1);
-    	hasArrow = false;
+    } else if (isKeyPressed(KeyEvent.VK_I) && yPos < WumpusWorld.height / TILE_SIZE - 1
+        && hasArrow) {
+      Room.killWumpus(xPos, yPos + 1);
+      hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0) {
-    	Room.killWumpus(xPos, yPos - 1);
-    	hasArrow = false;
+    } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0 && hasArrow) {
+      Room.killWumpus(xPos, yPos - 1);
+      hasArrow = false;
       show(delay);
     }
     Room.visited(xPos, yPos);
