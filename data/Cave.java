@@ -70,7 +70,7 @@ public class Cave {
   /**
    * Tells each room to layer on wether it is stinky or breezy.
    */
-  private void layerRooms() {
+  public void layerRooms() {
     for (Room[] y : map) {
       for (Room x : y) {
         x.layer();
