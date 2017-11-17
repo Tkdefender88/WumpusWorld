@@ -60,6 +60,7 @@ public class Player {
       // Room.shootWumpus(x - 1, y);
       show(delay);
     }
+    Room.visited(xPos, yPos);
     // TODO: handle shooting the arrow
   }
 }
