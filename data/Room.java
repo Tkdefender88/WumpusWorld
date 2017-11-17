@@ -34,7 +34,7 @@ public class Room {
 	 */
 	public void layer() {
 		Room[][] map = Cave.getCave();
-
+		boolean wumpus = false;
 		// Subtracting 50 to compensate for stdDraw drawing from center.
 		int xPos = ((x - 50) / TILE_SIZE);
 		int yPos = ((y - 50) / TILE_SIZE);
@@ -45,7 +45,7 @@ public class Room {
 
 			}
 			if (map[xPos - 1][yPos].isWumpus()) {
-				stinky = true;
+				wumpus = true;
 			}
 		}
 		if (xPos != map.length - 1) {
@@ -54,7 +54,7 @@ public class Room {
 
 			}
 			if (map[xPos + 1][yPos].isWumpus()) {
-				stinky = true;
+				wumpus = true;
 			}
 		}
 		if (yPos != 0) {
@@ -63,7 +63,7 @@ public class Room {
 
 			}
 			if (map[xPos][yPos - 1].isWumpus()) {
-				stinky = true;
+				wumpus = true;
 			}
 		}
 		if (yPos != map[0].length - 1) {
@@ -72,8 +72,13 @@ public class Room {
 
 			}
 			if (map[xPos][yPos + 1].isWumpus()) {
-				stinky = true;
+				wumpus = true;
 			}
+		}
+		if(wumpus) {
+			stinky = true;
+		}else {
+			stinky = false;
 		}
 	}
 
