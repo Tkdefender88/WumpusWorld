@@ -64,20 +64,20 @@ public class Player {
       xPos--;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0) {
-      // Room.shootWumpus(x - 1, y);
-    	//hasArrow =false;
+      Room.killWumpus(xPos - 1, yPos);
+    	hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_L) && xPos > 0) {
-      // Room.shootWumpus(x + 1, y);
-    	//hasArrow =false;
+    } else if (isKeyPressed(KeyEvent.VK_L) && xPos < WumpusWorld.width / TILE_SIZE - 1) {
+    	Room.killWumpus(xPos + 1, yPos);
+    	hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_I) && xPos > 0) {
-      // Room.shootWumpus(x , y + 1);
-    	//hasArrow =false;
+    } else if (isKeyPressed(KeyEvent.VK_I) && yPos < WumpusWorld.height / TILE_SIZE - 1) {
+    	Room.killWumpus(xPos, yPos + 1);
+    	hasArrow = false;
       show(delay);
-    } else if (isKeyPressed(KeyEvent.VK_K) && xPos > 0) {
-      // Room.shootWumpus(x , y - 1);
-    	//hasArrow =false;
+    } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0) {
+    	Room.killWumpus(xPos, yPos - 1);
+    	hasArrow = false;
       show(delay);
     }
     Room.visited(xPos, yPos);

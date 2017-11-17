@@ -58,11 +58,9 @@ public class WumpusWorld {
     boolean gameOver = false;
     int x = archer.getXPos();
     int y = archer.getYPos();
-    System.out.println(x + " " + y);
     Room[][] map = Cave.getCave();
 		if(map[x][y].isWumpus()) {
 			gameOver = true;
-			System.out.println("you die");
 		}
 		if(map[x][y].isPit()) {
 			gameOver = true;
