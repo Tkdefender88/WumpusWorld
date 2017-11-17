@@ -47,6 +47,7 @@ public class WumpusWorld {
       archer.update();
       show(100);
       clear();
+      cave.layerRooms();
     }
     cave.draw();
     archer.update();
