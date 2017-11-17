@@ -20,6 +20,9 @@ public class Player {
   private int y;
   private int xPos = x / TILE_SIZE;
   private int yPos = y / TILE_SIZE;
+  private boolean konami = false;
+  private int konamiCount = 0;
+  private boolean gold = false;
 
 
   public Player(int x, int y) {
@@ -81,6 +84,67 @@ public class Player {
     } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0 && hasArrow) {
       Room.killWumpus(xPos, yPos - 1);
       hasArrow = false;
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_G)) {
+      Room map[][] = Cave.getCave();
+      gold = map[xPos][yPos].isGold();
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_UP)) {
+    	//System.out.println("UP");
+      if(konamiCount == 0 || konamiCount == 1) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_DOWN)) {
+    	//System.out.println("DOWN");
+    	if(konamiCount == 2 || konamiCount == 3) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_LEFT)) {
+    	//System.out.println("LEFT");
+    	if(konamiCount == 4 || konamiCount == 6) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_RIGHT)) {
+    	//System.out.println("RIGHT");
+    	if(konamiCount == 5 || konamiCount == 7) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_B)) {
+    	//System.out.println("B");
+    	if(konamiCount == 8) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_A)) {
+    	//System.out.println("A");
+    	if(konamiCount == 9) {
+      	konamiCount++;
+      }else {
+      	konamiCount = 0;
+      }
+      show(delay);
+    } else if (isKeyPressed(KeyEvent.VK_ENTER)) {
+    	//System.out.println("START");
+    	if(konamiCount == 10) {
+      	konami = true;
+      	System.out.println("Cheat code active.");
+      }else {
+      	konamiCount = 0;
+      }
       show(delay);
     }
     Room.visited(xPos, yPos);
