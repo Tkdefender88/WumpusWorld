@@ -49,7 +49,7 @@ public class WumpusWorld {
       clear();
       cave.layerRooms();
     }
-    cave.draw();
+    cave.drawAll();
     archer.update();
     show(100);
     
@@ -60,10 +60,13 @@ public class WumpusWorld {
     int x = archer.getXPos();
     int y = archer.getYPos();
     Room[][] map = Cave.getCave();
-		if(map[x][y].isWumpus()) {
+		if(map[x][y].isWumpus() && archer.isKonami() == false) {
 			gameOver = true;
 		}
-		if(map[x][y].isPit()) {
+		if(map[x][y].isPit() && archer.isKonami() == false) {
+			gameOver = true;
+		}
+		if(archer.hasGold()) {
 			gameOver = true;
 		}
     return gameOver;

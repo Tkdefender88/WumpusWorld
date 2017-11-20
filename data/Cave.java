@@ -46,6 +46,16 @@ public class Cave {
   }
 
   /**
+   * Draw method calls all the rooms to draw themselves to the screen.
+   */
+  public void drawAll() {
+    for (Room[] r : map) {
+      for (Room x : r) {
+        x.drawAll();
+      }
+    }
+  }
+  /**
    * Builds the array of rooms that represent the cave Determines which rooms will be pits and then
    * sets the wumpus and the gold. Also tells the rooms to layer so that they can find if they are
    * smelly or breezy.
