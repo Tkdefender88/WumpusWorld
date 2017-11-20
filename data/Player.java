@@ -42,6 +42,16 @@ public class Player {
   public int getYPos() {
     return yPos;
   }
+  
+  public boolean hasGold() {
+  	return gold;
+  }
+  
+  public boolean isKonami() {
+  	return konami;
+  }
+  
+  
 
   /**
    * Draws the player to the screen.

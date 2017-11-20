@@ -109,6 +109,26 @@ public class Room {
 		}
 
 	}
+	
+	public void drawAll() {
+		picture(x, y, texture);
+		if (isPit()) {
+			picture(x, y, "PitTile.png");
+		}
+		if (isBreezy()) {
+			picture(x, y, "BreezeTile.png");
+		}
+		if (isStench()) {
+			picture(x, y, "StenchTile.png");
+		}
+		if (isGold()) {
+			picture(x, y, "GoldTile.png");
+		}
+		if (isWumpus()) {
+			picture(x, y, "WumpusTile.png");
+		}
+
+	}
 
 	/*
 	 **************************************************************************
