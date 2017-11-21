@@ -10,6 +10,7 @@ import static helpers.StdDraw.isKeyPressed;
 import static helpers.StdDraw.picture;
 import static helpers.StdDraw.show;
 import java.awt.event.KeyEvent;
+import helpers.StdAudio;
 
 public class Player {
 
@@ -79,20 +80,24 @@ public class Player {
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0 && hasArrow) {
       Room.killWumpus(xPos - 1, yPos);
+      StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_L) && xPos < WumpusWorld.width / TILE_SIZE - 1
         && hasArrow) {
       Room.killWumpus(xPos + 1, yPos);
+      StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_I) && yPos < WumpusWorld.height / TILE_SIZE - 1
         && hasArrow) {
       Room.killWumpus(xPos, yPos + 1);
+      StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0 && hasArrow) {
       Room.killWumpus(xPos, yPos - 1);
+      StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_G)) {

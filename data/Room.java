@@ -9,6 +9,7 @@
 package data;
 
 import static helpers.StdDraw.picture;
+import helpers.StdAudio;
 
 public class Room {
 
@@ -188,4 +189,5 @@ public class Room {
 	public boolean isVisited() {
 		return isVisited;
 	}
+
 }
