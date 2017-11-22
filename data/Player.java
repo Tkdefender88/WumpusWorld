@@ -10,8 +10,9 @@ import static helpers.StdDraw.isKeyPressed;
 import static helpers.StdDraw.picture;
 import static helpers.StdDraw.show;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class Player {
+public class Player implements KeyListener {
 
   private static final int TILE_SIZE = WumpusWorld.TILE_SIZE;
   private String texture = "HeroTile.png";
@@ -45,8 +46,67 @@ public class Player {
   /**
    * Takes input and moves the player.
    */
-  private void input() {
-    int delay = 150;
+  private void input(KeyEvent e) {
+    int delay = 100;
+    int keyCode = e.getKeyCode();
+
+    boolean konami = checkKonami(keyCode);
+
+    switch (keyCode) {
+      case KeyEvent.VK_W:
+        if (yPos < WumpusWorld.height / TILE_SIZE - 1) {
+          yPos++;
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_S:
+        if (yPos > 0) {
+          yPos--;
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_D:
+        if (xPos < WumpusWorld.width / TILE_SIZE - 1) {
+          xPos++;
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_A:
+        if (xPos > 0) {
+          xPos--;
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_J:
+        if (xPos > 0 && hasArrow) {
+          Room.killWumpus(xPos, yPos, "-x");
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_L:
+        if (xPos < WumpusWorld.width / TILE_SIZE - 1 && hasArrow) {
+          Room.killWumpus(xPos, yPos, "+x");
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_I:
+        if (yPos < WumpusWorld.height / TILE_SIZE - 1 && hasArrow) {
+          Room.killWumpus(xPos, yPos, "+y");
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_K:
+        if (yPos > 0 && hasArrow) {
+          Room.killWumpus(xPos, yPos, "-y");
+          show(delay);
+        }
+        break;
+      case KeyEvent.VK_G:
+        Room map[][] = Cave.getCave();
+        gold = map[xPos][yPos].isGold();
+        show(delay);
+        break;
+    }
     if (isKeyPressed(KeyEvent.VK_W) && yPos < WumpusWorld.height / TILE_SIZE - 1) {
       yPos++;
       show(delay);
@@ -107,10 +167,11 @@ public class Player {
     Room.visited(xPos, yPos);
   }
 
+  private int counter = 0;
+
   private boolean checkKonami(int keyCode) {
     // Key code int values for Up up down down left right left right b a enters
     int[] sequence = {86, 86, 40, 40, 37, 39, 37, 39, 66, 65, 61};
-    int counter = 0;
     if (sequence[counter] == keyCode) {
       counter += 1;
       if (counter == sequence.length) {
@@ -142,5 +203,23 @@ public class Player {
 
   public boolean isKonami() {
     return konami;
+  }
+
+  @Override
+  public void keyPressed(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void keyReleased(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void keyTyped(KeyEvent arg0) {
+    // TODO Auto-generated method stub
+
   }
 }
