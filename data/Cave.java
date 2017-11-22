@@ -55,6 +55,7 @@ public class Cave {
       }
     }
   }
+
   /**
    * Builds the array of rooms that represent the cave Determines which rooms will be pits and then
    * sets the wumpus and the gold. Also tells the rooms to layer so that they can find if they are
@@ -133,16 +134,6 @@ public class Cave {
     coords[0] = x;
     coords[1] = y;
     return coords;
-  }
-
-  /**
-   * Provides a random Y value for placing gold and the wumpus. Does not exceed the height of the
-   * map.
-   * 
-   * @return an integer for the Y coordinate for the wumpus or gold.
-   */
-  private int randomY() {
-    return (int) (Math.random() * height - 1) + 1;
   }
 
   /**
