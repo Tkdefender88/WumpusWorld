@@ -14,12 +14,14 @@ public class Cave {
   private int width;
   private int height;
   private static Room[][] map;
+  private WumpusWorld ww;
   static Cave cave;
 
   // Constructor for the cave.
-  public Cave(int width, int height) {
+  public Cave(int width, int height, WumpusWorld ww) {
     this.width = width;
     this.height = height;
+    this.ww = ww;
     map = new Room[width][height];
   }
 
@@ -66,7 +68,7 @@ public class Cave {
       for (int x = 0; x < width; x++) {
         // Adding 50 to adjust for StdDraw drawing from the center of
         // the image.
-        map[x][y] = new Room(x * TILE_SIZE + 50, y * TILE_SIZE + 50);
+        map[x][y] = new Room(x * TILE_SIZE + 50, y * TILE_SIZE + 50, this);
 
         if ((Math.random() * 100) <= 20 && (x != 0 || y != 0)) {
           map[x][y].setPit();
@@ -127,6 +129,7 @@ public class Cave {
     return coords;
   }
 
+  // Provides a random tile including 00
   private int[] randomTile() {
     int x = (int) (Math.random() * width - 1);
     int y = (int) (Math.random() * height - 1);
@@ -141,7 +144,7 @@ public class Cave {
    * 
    * @return a 2D array of room objects representing the cave map.
    */
-  public static Room[][] getCave() {
+  public Room[][] getCave() {
     return map;
   }
 }

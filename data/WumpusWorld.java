@@ -12,63 +12,64 @@ import static helpers.StdDraw.clear;
 import static helpers.StdDraw.setCanvasSize;
 import static helpers.StdDraw.setXscale;
 import static helpers.StdDraw.setYscale;
-import static helpers.StdDraw.show;
+import javax.swing.JPanel;
+import helpers.StdDraw;
 
 
-public class WumpusWorld {
+public class WumpusWorld extends JPanel {
   public static final int TILE_SIZE = 100;
   public static int width;
   public static int height;
-  static WumpusWorld ww;
-  Player archer;
-  static Cave cave;
-  
+
+  Cave cave = new Cave(width / TILE_SIZE, height / TILE_SIZE, this);
+  Player archer = new Player(0, 0, this);
 
   public static void main(String[] args) {
     width = Integer.parseInt(args[0]) * TILE_SIZE;
     height = Integer.parseInt(args[1]) * TILE_SIZE;
-    ww = new WumpusWorld();
+    WumpusWorld ww = new WumpusWorld();
     ww.init();
     ww.play();
   }
 
+  // Sets up the window
   public void init() {
-    cave = new Cave(width / TILE_SIZE, height / TILE_SIZE);
     cave.buildCave();
-    archer = new Player(0, 0);
+
     setCanvasSize(width, height);
     setXscale(0, width);
     setYscale(0, height);
   }
 
+  // Main game loop
   public void play() {
     while (!isGameOver()) {
       cave.draw();
       archer.update();
-      show(100);
+      StdDraw.show(100);
       clear();
       cave.layerRooms();
     }
     cave.drawAll();
     archer.update();
-    show(100);
-    
+    StdDraw.show(100);
   }
 
+  // Tests if the game is over
   public boolean isGameOver() {
     boolean gameOver = false;
     int x = archer.getXPos();
     int y = archer.getYPos();
-    Room[][] map = Cave.getCave();
-		if(map[x][y].isWumpus() && archer.isKonami() == false) {
-			gameOver = true;
-		}
-		if(map[x][y].isPit() && archer.isKonami() == false) {
-			gameOver = true;
-		}
-		if(archer.hasGold()) {
-			gameOver = true;
-		}
+    Room[][] map = cave.getCave();
+    if (map[x][y].isWumpus() && !archer.isKonami()) {
+      gameOver = true;
+    }
+    if (map[x][y].isPit() && !archer.isKonami()) {
+      gameOver = true;
+    }
+    if (archer.hasGold()) {
+      gameOver = true;
+    }
     return gameOver;
   }
 }
