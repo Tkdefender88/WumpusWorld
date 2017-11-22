@@ -60,24 +60,24 @@ public class Player {
       xPos--;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_J) && xPos > 0 && hasArrow) {
-      Room.killWumpus(xPos - 1, yPos);
+      Room.killWumpus(xPos, yPos, "-x");
       // StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_L) && xPos < WumpusWorld.width / TILE_SIZE - 1
         && hasArrow) {
-      Room.killWumpus(xPos + 1, yPos);
+    	Room.killWumpus(xPos, yPos, "+x");
       // StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_I) && yPos < WumpusWorld.height / TILE_SIZE - 1
         && hasArrow) {
-      Room.killWumpus(xPos, yPos + 1);
+    	Room.killWumpus(xPos, yPos, "+y");
       // StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);
     } else if (isKeyPressed(KeyEvent.VK_K) && yPos > 0 && hasArrow) {
-      Room.killWumpus(xPos, yPos - 1);
+    	Room.killWumpus(xPos, yPos, "-y");
       // StdAudio.play("arrow2.wav");
       hasArrow = false;
       show(delay);

@@ -152,10 +152,26 @@ public class Room {
     map[x][y].isVisited = true;
   }
 
-  public static void killWumpus(int x, int y) {
-    Room[][] map = Cave.getCave();
-    map[x][y].wumpus = false;
-  }
+  public static void killWumpus(int x, int y, String direction) {
+		Room[][] map = Cave.getCave();
+		if(direction == "+y") {
+			for(int i = y; i < map[0].length; i++) {
+				map[x][i].wumpus = false;
+			}
+		}else if(direction == "-y") {
+			for(int i = y; i > 0; i--) {
+				map[x][i].wumpus = false;
+			}
+		}else if(direction == "+x") {
+			for(int i = x; i < map.length; i++) {
+				map[i][y].wumpus = false;
+			}
+		}else if(direction == "-x") {
+			for(int i = x; i > 0; i--) {
+				map[i][y].wumpus = false;
+			}
+		}
+	}
 
   public static void isSafe(int x, int y) {
     Room[][] map = Cave.getCave();
