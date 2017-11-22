@@ -12,9 +12,13 @@ import static helpers.StdDraw.picture;
 
 public class Room {
 
-  private int x, y;
   private static final int TILE_SIZE = Cave.TILE_SIZE;
+  private int x, y;
+  private int xPos;
+  private int yPos;
+
   private String texture = "VisitedMapTile.png";
+
   private Boolean stinky = false;
   private Boolean breezy = false;
   private Boolean gold = false;
@@ -22,10 +26,15 @@ public class Room {
   private Boolean wumpus = false;
   private Boolean isVisited = false;
 
+  private Cave cave;
+
   // Room constructor.
-  public Room(int x, int y) {
+  public Room(int x, int y, Cave cave) {
     this.x = x;
     this.y = y;
+    this.cave = cave;
+    xPos = (x - 50) / TILE_SIZE;
+    yPos = (y - 50) / TILE_SIZE;
   }
 
   /**
@@ -33,11 +42,9 @@ public class Room {
    * If there is a pit or wumpus next to it then the tile becomes breezy or stinky respectively.
    */
   public void layer() {
-    Room[][] map = Cave.getCave();
+    Room[][] map = cave.getCave();
     boolean wumpus = false;
     // Subtracting 50 to compensate for stdDraw drawing from center.
-    int xPos = ((x - 50) / TILE_SIZE);
-    int yPos = ((y - 50) / TILE_SIZE);
 
     if (xPos != 0) {
       if (map[xPos - 1][yPos].isPit()) {
@@ -107,7 +114,6 @@ public class Room {
     if (!isVisited()) {
       picture(x, y, "NotVisitedMapTile.png");
     }
-
   }
 
   public void drawAll() {
@@ -127,7 +133,6 @@ public class Room {
     if (isWumpus()) {
       picture(x, y, "WumpusTile.png");
     }
-
   }
 
   /*
@@ -147,35 +152,32 @@ public class Room {
     this.wumpus = true;
   }
 
-  public static void visited(int x, int y) {
-    Room[][] map = Cave.getCave();
-    map[x][y].isVisited = true;
+  public void setVisited(boolean visited) {
+    this.isVisited = visited;
   }
 
-  public static void killWumpus(int x, int y, String direction) {
-		Room[][] map = Cave.getCave();
-		if(direction == "+y") {
-			for(int i = y; i < map[0].length; i++) {
-				map[x][i].wumpus = false;
-			}
-		}else if(direction == "-y") {
-			for(int i = y; i > 0; i--) {
-				map[x][i].wumpus = false;
-			}
-		}else if(direction == "+x") {
-			for(int i = x; i < map.length; i++) {
-				map[i][y].wumpus = false;
-			}
-		}else if(direction == "-x") {
-			for(int i = x; i > 0; i--) {
-				map[i][y].wumpus = false;
-			}
-		}
-	}
+  public void killWumpus(int x, int y, String direction) {
+    if (direction == "+y") {
+      for (int i = y; i < cave.getCave()[0].length; i++) {
+        cave.getCave()[xPos][i].wumpus = false;
+      }
+    } else if (direction == "-y") {
+      for (int i = y; i > 0; i--) {
+        cave.getCave()[xPos][i].wumpus = false;
+      }
+    } else if (direction == "+x") {
+      for (int i = x; i < cave.getCave().length; i++) {
+        cave.getCave()[i][yPos].wumpus = false;
+      }
+    } else if (direction == "-x") {
+      for (int i = x; i > 0; i--) {
+        cave.getCave()[i][yPos].wumpus = false;
+      }
+    }
+  }
 
-  public static void isSafe(int x, int y) {
-    Room[][] map = Cave.getCave();
-    if (map[x][y].isWumpus()) {
+  public void isSafe(int x, int y) {
+    if (cave.getCave()[x][y].isWumpus()) {
 
     }
   }
